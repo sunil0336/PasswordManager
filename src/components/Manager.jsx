@@ -11,7 +11,7 @@ const Manager = () => {
             <input className="rounded-full" type="text" name="" id="" />
             <div className="flex">
             <input type="text" name="" id="" /> 
-            <input type="text" name="" id="" />
+            <input type="text" name="" id="" /> 
             </div>
         </div>
       </div>
