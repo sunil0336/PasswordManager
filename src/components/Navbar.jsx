@@ -9,7 +9,7 @@ const Navbar = () => {
               <li className='flex gap-3'>
                   <a className='hover:font-bold' href="/">Home</a>
                   <a className='hover:font-bold' href="#">About</a>
-                  <a className='hover:font-bold' href="#">Contact </a>
+                  <a className='hover:font-bold' href="#">Contact</a>
               </li>
           </ul>
         </div>
