@@ -7,7 +7,6 @@ import { useRef } from "react";
 const Manager = () => {
   const ref =useRef()
   const pwd = () => {
-    // alert("Hello");
     if(ref.current.src.includes(hide)){
       ref.current.src = show
     }else{
