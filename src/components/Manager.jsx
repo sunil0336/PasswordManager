@@ -104,9 +104,9 @@ const Manager = () => {
               </tr>
             </thead>
             <tbody className="bg-green-100 text-black">
-              {passwordArray.map((item)=>{
-                return <tr>
-                <td className="py-2 px-1 border border-white text-center w-32">{item.site}</td>
+              {passwordArray.map((item, index)=>{
+                return <tr key={index}>
+                <td className="py-2 px-1 border border-white text-center w-32"><a href={item.site} target="_blank">{item.site}</a></td>
                 <td className="py-2 px-1 border border-white text-center w-32">{item.username}</td>
                 <td className="py-2 px-1 border border-white text-center w-32">{item.password}</td>
               </tr>
