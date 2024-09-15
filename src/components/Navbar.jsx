@@ -18,9 +18,9 @@ const Navbar = () => {
             {/* <a href="https://github.com/sunil0336" target='_blank'>
               <img className='invert w-8' src={github} alt="githubLogo" />  
             </a> */}
-              <button className='bg-green-95 bg-green-700 flex justify-between items-center rounded-full pr-1'>
+              <button className='bg-green-95 bg-green-700 flex justify-between items-center rounded-full'>
                 <img className='invert w-8' src={github} alt="githubLogo" />
-                <span>Github</span> 
+                <span className='font-bold px-2'>Github</span> 
               </button>
           </div>
         </div>
