@@ -91,7 +91,7 @@ const Manager = () => {
       {/* Same as */}
       <ToastContainer />
       <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
-      <div className="max-w-4xl mycontainer">
+      <div className="max-w-4xl p-2 md:mycontainer">
         <h1 className="text-4xl text font-bold text-center text-white">
           Password
         </h1>
@@ -152,7 +152,7 @@ const Manager = () => {
           <h1 className="font-bold text-2xl pb-4">Your Passwrods</h1>
           {passwordArray.length === 0 && <div>No Passwords</div>}
           {passwordArray.length != 0 && (
-            <table className="table-auto w-full  rounded-lg overflow-hidden">
+            <table className="table-auto w-full rounded-lg overflow-hidden mb-10">
               <thead className=" bg-green-800">
                 <tr>
                   <th className="py-2">SITE</th>
