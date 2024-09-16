@@ -13,7 +13,7 @@ const Navbar = () => {
             </a> */}
               <button className='bg-green-95 bg-green-700 flex justify-between items-center rounded-full border border-green-500'>
                 <img className='invert w-8' src={github} alt="githubLogo" />
-                <span className='font-bold px-2'>Github</span> 
+                <span onClick="https://boxicons.com/</button>" className='font-bold px-2'>Github</span>
               </button>
           </div>
         </div>

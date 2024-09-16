@@ -91,7 +91,7 @@ const Manager = () => {
       {/* Same as */}
       <ToastContainer />
       <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
-      <div className="max-w-4xl p-2 md:mycontainer">
+      <div className="max-w-4xl p-2 md:mycontainer min-h-[88.2vh]">
         <h1 className="text-4xl text font-bold text-center text-white">
           Password
         </h1>
