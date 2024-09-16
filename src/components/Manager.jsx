@@ -6,20 +6,21 @@ import copy from "../assets/copy.svg";
 import edit from "../assets/edit.svg";
 import deletee from "../assets/delete.svg";
 import { useRef, useState } from "react";
-
 import {ToastContainer, toast } from "react-toastify";
+import { v4 as uuidv4 } from 'uuid';
+
 import "react-toastify/dist/ReactToastify.css";
 
 const Manager = () => {
   const ref = useRef();
   const passwordRef = useRef();
   const [form, setform] = useState({ site: "", username: "", password: "" });
-  const [passwordArray, setpasswordArray] = useState([]);
+  const [passwordArray, setPasswordArray] = useState([]);
 
   useEffect(() => {
     let passwords = localStorage.getItem("passwords");
     if (passwords) {
-      setpasswordArray(JSON.parse(passwords));
+      setPasswordArray(JSON.parse(passwords));
     }
   }, []);
 
@@ -34,10 +35,27 @@ const Manager = () => {
     }
   };
   const savepwd = () => {
-    setpasswordArray([...passwordArray, form]);
-    localStorage.setItem("password", JSON.stringify([...passwordArray, form]));
+    setPasswordArray([...passwordArray, {...form, id: uuidv4()}]);
+    localStorage.setItem("passwords", JSON.stringify([...passwordArray, {...form, id: uuidv4()}]))
     console.log([...passwordArray, form]);
+    setform({ site: "", username: "", password: "" });
   };
+
+  const delpwd = (id) => {
+    console.log("Deleting pwd id: ", id)
+    let c = confirm("Do you want to delete this Password?");
+    if(c){
+      setPasswordArray(passwordArray.filter(item=>item.id!==id));
+      localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item=>item.id!==id)))
+    }
+  };
+
+  const editpwd = (id) => {
+    console.log("Editing pwd id: ", id)
+    setform(passwordArray.filter(i=>i.id===id)[0])
+    setPasswordArray(passwordArray.filter(item=>item.id!==id));
+  };
+
   const handlechange = (e) => {
     setform({ ...form, [e.target.name]: e.target.value });
   };
@@ -100,7 +118,7 @@ const Manager = () => {
               className="rounded-full border border-green-500 w-full text-black px-4 py-1"
               type="text"
               name="username"
-              id=""
+              id="username"
             />
             <div className="relative w-full">
               <input
@@ -109,9 +127,9 @@ const Manager = () => {
                 onChange={handlechange}
                 placeholder="Enter Password"
                 className="rounded-full border border-green-500 w-full text-black px-4 py-1"
-                type="text"
+                type="password" 
                 name="password"
-                id=""
+                id="password"
               />
               <img
                 ref={ref}
@@ -127,7 +145,7 @@ const Manager = () => {
             className="flex justify-center items-center gap-3 rounded-full bg-green-400 hover:bg-green-300 border border-green-700 px-6 py-2 w-fit"
           >
             <img className="w-5" src={add} alt="add" />
-            Add Password
+            Save Password
           </button>
         </div>
         <div className="passwords text-white">
@@ -190,10 +208,10 @@ const Manager = () => {
                       </td>
                       <td className="py-2 px-1 border border-white text-center w-32">
                         <div className="flex">
-                          <span className="cursor-pointer mx-2">
+                          <span onClick={()=>editpwd(item.id)} className="cursor-pointer mx-2">
                             <img src={edit} alt="edit" />
                           </span>
-                          <span className="cursor-pointer">
+                          <span onClick={()=>delpwd(item.id)} className="cursor-pointer">
                             <img src={deletee} alt="delete" />
                           </span>
                         </div>
