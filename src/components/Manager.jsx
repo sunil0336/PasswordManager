@@ -17,11 +17,18 @@ const Manager = () => {
   const [form, setform] = useState({ site: "", username: "", password: "" });
   const [passwordArray, setPasswordArray] = useState([]);
 
+  const getpwd = async () => {
+    let req = await fetch("http://localhost:3000/api/")
+    let passwords = await req.json()
+    setPasswordArray(passwords)
+    // if (passwords) {
+    //   setPasswordArray(JSON.parse(passwords));
+    // }
+  }
+
   useEffect(() => {
-    let passwords = localStorage.getItem("passwords");
-    if (passwords) {
-      setPasswordArray(JSON.parse(passwords));
-    }
+    getpwd()
+
   }, []);
 
   const pwd = () => {
