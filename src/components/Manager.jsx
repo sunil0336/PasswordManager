@@ -6,8 +6,8 @@ import copy from "../assets/copy.svg";
 import edit from "../assets/edit.svg";
 import deletee from "../assets/delete.svg";
 import { useRef, useState } from "react";
-import {ToastContainer, toast } from "react-toastify";
-import { v4 as uuidv4 } from 'uuid';
+import { ToastContainer, toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -18,17 +18,16 @@ const Manager = () => {
   const [passwordArray, setPasswordArray] = useState([]);
 
   const getpwd = async () => {
-    let req = await fetch("http://localhost:3000/api/")
-    let passwords = await req.json()
-    setPasswordArray(passwords)
+    let req = await fetch("http://localhost:3000/");
+    let passwords = await req.json();
+    setPasswordArray(passwords);
     // if (passwords) {
     //   setPasswordArray(JSON.parse(passwords));
     // }
-  }
+  };
 
   useEffect(() => {
-    getpwd()
-
+    getpwd();
   }, []);
 
   const pwd = () => {
@@ -41,26 +40,42 @@ const Manager = () => {
       passwordRef.current.type = "text";
     }
   };
-  const savepwd = () => {
-    setPasswordArray([...passwordArray, {...form, id: uuidv4()}]);
-    localStorage.setItem("passwords", JSON.stringify([...passwordArray, {...form, id: uuidv4()}]))
-    console.log([...passwordArray, form]);
+  const savepwd = async () => {
+    setPasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
+
+    let res = await fetch("http://localhost:3000/", {
+      method: "DELETE",
+      headers: { "Contnt-Type": "application/json" },
+      body: JSON.stringify({ id: form.id }),
+    });
+
+    await fetch("http://localhost:3000/", {
+      method: "POST",
+      headers: { "Contnt-Type": "application/json" },
+      body: JSON.stringify({ ...form, id: uuidv4() }),
+    });
+
+    // console.log([...passwordArray, form]);
     setform({ site: "", username: "", password: "" });
   };
 
-  const delpwd = (id) => {
-    console.log("Deleting pwd id: ", id)
+  const delpwd = async (id) => {
+    console.log("Deleting pwd id: ", id);
     let c = confirm("Do you want to delete this Password?");
-    if(c){
-      setPasswordArray(passwordArray.filter(item=>item.id!==id));
-      localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item=>item.id!==id)))
+    if (c) {
+      setPasswordArray(passwordArray.filter((item) => item.id !== id));
+      let res = await fetch("http://localhost:3000/", {
+        method: "DELETE",
+        headers: { "Contnt-Type": "application/json" },
+        body: JSON.stringify({ ...form, id }),
+      });
     }
   };
 
   const editpwd = (id) => {
-    console.log("Editing pwd id: ", id)
-    setform(passwordArray.filter(i=>i.id===id)[0])
-    setPasswordArray(passwordArray.filter(item=>item.id!==id));
+    console.log("Editing pwd id: ", id);
+    setform({ ...passwordArray.filter((i) => i.id === id)[0], id: id });
+    setPasswordArray(passwordArray.filter((item) => item.id !== id));
   };
 
   const handlechange = (e) => {
@@ -134,7 +149,7 @@ const Manager = () => {
                 onChange={handlechange}
                 placeholder="Enter Password"
                 className="rounded-full border border-green-500 w-full text-black px-4 py-1"
-                type="password" 
+                type="password"
                 name="password"
                 id="password"
               />
@@ -202,7 +217,7 @@ const Manager = () => {
                       </td>
                       <td className="py-2 px-1 border border-white text-center w-32">
                         <div className="flex items-center justify-center">
-                          {item.password}
+                          {"*".repeat(item.password.length)}
                           <img
                             className="cursor-pointer"
                             src={copy}
@@ -215,10 +230,16 @@ const Manager = () => {
                       </td>
                       <td className="py-2 px-1 border border-white text-center w-32">
                         <div className="flex">
-                          <span onClick={()=>editpwd(item.id)} className="cursor-pointer mx-2">
+                          <span
+                            onClick={() => editpwd(item.id)}
+                            className="cursor-pointer mx-2"
+                          >
                             <img src={edit} alt="edit" />
                           </span>
-                          <span onClick={()=>delpwd(item.id)} className="cursor-pointer">
+                          <span
+                            onClick={() => delpwd(item.id)}
+                            className="cursor-pointer"
+                          >
                             <img src={deletee} alt="delete" />
                           </span>
                         </div>
