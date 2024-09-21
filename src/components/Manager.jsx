@@ -43,7 +43,7 @@ const Manager = () => {
   const savepwd = async () => {
     setPasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
 
-    let res = await fetch("http://localhost:3000/", {
+    await fetch("http://localhost:3000/", {
       method: "DELETE",
       headers: { "Contnt-Type": "application/json" },
       body: JSON.stringify({ id: form.id }),
@@ -64,7 +64,7 @@ const Manager = () => {
     let c = confirm("Do you want to delete this Password?");
     if (c) {
       setPasswordArray(passwordArray.filter((item) => item.id !== id));
-      let res = await fetch("http://localhost:3000/", {
+        await fetch("http://localhost:3000/", {
         method: "DELETE",
         headers: { "Contnt-Type": "application/json" },
         body: JSON.stringify({ ...form, id }),
