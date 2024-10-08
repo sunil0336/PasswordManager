@@ -41,21 +41,24 @@ const Manager = () => {
     }
   };
   const savepwd = async () => {
-    setPasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
-
-    await fetch("http://localhost:3000/", {
-      method: "DELETE",
-      headers: { "Contnt-Type": "application/json" },
-      body: JSON.stringify({ id: form.id }),
-    });
-
+    // Delete the previous password entry if exists
+    // await fetch("http://localhost:3000/", {
+    //   method: "DELETE",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ id: form.id }) // Assuming you are deleting based on form.id
+    // });
+    
+    // Add to the local state without custom `id`
+    setPasswordArray([...passwordArray, { ...form,id: uuidv4() }]);
+  
+    // Post new password entry to the API
     await fetch("http://localhost:3000/", {
       method: "POST",
-      headers: { "Contnt-Type": "application/json" },
-      body: JSON.stringify({ ...form, id: uuidv4() }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...form, id: uuidv4() }) // No need to add uuidv4(), MongoDB will handle `_id`
     });
-
-    // console.log([...passwordArray, form]);
+  
+    // Reset form after saving
     setform({ site: "", username: "", password: "" });
   };
 
@@ -63,11 +66,11 @@ const Manager = () => {
     console.log("Deleting pwd id: ", id);
     let c = confirm("Do you want to delete this Password?");
     if (c) {
-      setPasswordArray(passwordArray.filter((item) => item.id !== id));
+      setPasswordArray(passwordArray.filter(item => item.id !== id));
         await fetch("http://localhost:3000/", {
         method: "DELETE",
-        headers: { "Contnt-Type": "application/json" },
-        body: JSON.stringify({ ...form, id }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ /*...form,*/ id })//.......
       });
     }
   };
