@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <nav className="bg-[#593BD1] text-white">
       <div className="mycontainer flex justify-between items-center py-2 px-10">
-        <div className="logo font-bold text-2xl">Password</div>
+        <div className="logo font-bold text-2xl"><i>Password</i></div>
         <div>
           {/* <a href="https://github.com/sunil0336" target='_blank'>
               <img className='invert w-8' src={github} alt="githubLogo" />  
