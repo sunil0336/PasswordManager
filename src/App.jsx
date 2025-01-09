@@ -7,7 +7,9 @@ function App() {
   return (
     <>
       <Navbar/>
-      <div className="[background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
+      {/* <div className="[background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"> */}
+      <div className="[background:linear-gradient(45deg,#000235,#00069B)]">
+
         <Manager/>
       </div>
       <Footer/>

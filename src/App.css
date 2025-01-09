@@ -1,1 +1,16 @@
+
+  
+  /* For Webkit-based browsers (Chrome, Edge, Safari) */
+  body::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: #593BD1;
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: #1E1E1E;
+    border-radius: 10px;
+  }
   
