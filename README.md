@@ -6,9 +6,20 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 
+## Project Design Screen
+
+- Home Screen
+![Home Screen](Screenshots/homescreen.png)
+
+- Responsive
+<img src="Screenshots/resposnsive.png" width="45%" />
+- Edit, Delete, Close. Option
+<img src="Screenshots/more.png" width="45%" />
+  
 
 
-# need to setup in backend
-- npm install 
-- npm install cors
+
+
+
 
